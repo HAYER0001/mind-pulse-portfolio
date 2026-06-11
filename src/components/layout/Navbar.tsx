@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Activity } from "lucide-react";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const navLinks = [
   { label: "Platform Modules", href: "#modules" },
@@ -32,28 +33,34 @@ export default function Navbar() {
           </div>
         </a>
 
-        {/* Desktop links */}
-        <ul className="hidden items-center gap-8 lg:flex">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm font-medium text-clinical-600 transition-colors hover:text-medical-600 dark:text-clinical-400 dark:hover:text-medical-400"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {/* Desktop links + theme toggle */}
+        <div className="hidden items-center gap-8 lg:flex">
+          <ul className="flex items-center gap-8">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="text-sm font-medium text-clinical-600 transition-colors hover:text-medical-600 dark:text-clinical-400 dark:hover:text-medical-400"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <ThemeToggle />
+        </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="inline-flex items-center justify-center rounded-md p-2 text-clinical-600 lg:hidden dark:text-clinical-400"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        {/* Mobile: theme toggle + hamburger */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
+          <button
+            className="inline-flex items-center justify-center rounded-md p-2 text-clinical-600 dark:text-clinical-400"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}
