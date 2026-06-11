@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ThemeProvider from "@/components/ThemeProvider";
+import SmoothScroller from "@/components/layout/SmoothScroller";
+import AnimatedBackground from "@/components/ui/AnimatedBackground";
+import AppShell from "@/components/ui/AppShell";
 import "./globals.css";
 
 const inter = Inter({
@@ -20,8 +23,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.className} h-full antialiased`} suppressHydrationWarning>
-      <body className="min-h-full flex flex-col">
-        <ThemeProvider>{children}</ThemeProvider>
+      <body className="flex min-h-full flex-col p-4 md:p-8">
+        <ThemeProvider>
+          <SmoothScroller>
+            <AnimatedBackground />
+            <AppShell>{children}</AppShell>
+          </SmoothScroller>
+        </ThemeProvider>
       </body>
     </html>
   );
