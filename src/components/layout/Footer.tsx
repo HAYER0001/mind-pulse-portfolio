@@ -1,52 +1,94 @@
+"use client";
+
 import { Activity } from "lucide-react";
+import { motion } from "framer-motion";
 
 const currentYear = new Date().getFullYear();
 
+const linkGroups = [
+  {
+    heading: "Product",
+    links: [
+      { label: "Home", href: "#" },
+      { label: "Features", href: "#features" },
+    ],
+  },
+  {
+    heading: "Resources",
+    links: [
+      { label: "Use Cases", href: "#workflow" },
+      { label: "Privacy", href: "#" },
+    ],
+  },
+];
+
 export default function Footer() {
   return (
-    <footer className="rounded-b-[2.5rem] border-t border-clinical-200 bg-white dark:border-clinical-800 dark:bg-clinical-950">
-      <div className="mx-auto max-w-7xl px-6 py-12">
-        <div className="flex flex-col items-center gap-6 text-center">
-          {/* Brand */}
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-medical-600 text-white">
-              <Activity size={18} />
-            </div>
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-lg font-bold text-clinical-900 dark:text-white">
-                MindPulse
-              </span>
-              <span className="text-xs font-semibold tracking-wider text-medical-600 dark:text-medical-400">
-                HIMS
-              </span>
-            </div>
-          </div>
-
-          {/* Mission */}
-          <p className="max-w-lg text-sm leading-relaxed text-clinical-500 dark:text-clinical-400">
-            A comprehensive, multi-tenant hospital management and clinical
-            ecosystem — streamlining patient care, clinical operations, and
-            administrative workflows for healthcare institutions of every scale.
-          </p>
-
-          {/* Stack */}
-          <div className="flex flex-wrap justify-center gap-2">
-            {["Flutter", "Firebase", "HIPAA Compliant", "Multi-Tenant"].map(
-              (tag) => (
-                <span
-                  key={tag}
-                  className="rounded-md border border-clinical-200 bg-clinical-50 px-3 py-1 text-xs font-medium text-clinical-600 dark:border-clinical-700 dark:bg-clinical-800 dark:text-clinical-400"
-                >
-                  {tag}
+    <footer className="rounded-b-[2.5rem] border-t border-white/5 bg-clinical-950">
+      <div className="mx-auto max-w-6xl px-6 pt-16 pb-10">
+        {/* Top row: logo + link grid */}
+        <div className="grid gap-12 sm:grid-cols-[1.5fr_1fr_1fr]">
+          {/* Brand column */}
+          <div>
+            <a href="#" className="inline-flex items-center gap-2">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-medical-600 text-white">
+                <Activity size={15} />
+              </div>
+              <div className="flex items-baseline gap-1">
+                <span className="text-sm font-bold text-white">
+                  MindPulse
                 </span>
-              )
-            )}
+                <span className="text-[10px] font-semibold tracking-wider text-medical-400">
+                  HIMS
+                </span>
+              </div>
+            </a>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-clinical-500">
+              A unified clinical ecosystem streamlining patient care and
+              hospital operations at every scale.
+            </p>
           </div>
 
-          {/* Divider + copyright */}
-          <div className="h-px w-full max-w-xs bg-clinical-200 dark:bg-clinical-800" />
+          {/* Link columns */}
+          {linkGroups.map((group) => (
+            <div key={group.heading}>
+              <h4 className="text-xs font-semibold uppercase tracking-widest text-clinical-500">
+                {group.heading}
+              </h4>
+              <ul className="mt-4 space-y-3">
+                {group.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-clinical-400 transition-colors hover:text-white"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
-          <p className="text-xs text-clinical-400 dark:text-clinical-500">
+        {/* Divider */}
+        <div className="mt-14 h-px bg-white/5" />
+
+        {/* Bottom row */}
+        <div className="mt-8 flex flex-col items-center gap-6 text-center">
+          {/* Signature with glow hover */}
+          <motion.p
+            className="cursor-default bg-gradient-to-r from-clinical-600 via-clinical-500 to-clinical-600 bg-clip-text text-sm font-medium text-transparent transition-all duration-500"
+            whileHover={{
+              backgroundImage:
+                "linear-gradient(to right, #64748b, #e2e8f0, #64748b)",
+              textShadow: "0 0 30px rgba(226,232,240,0.3)",
+            }}
+          >
+            Engineered by Hayer Technologies.
+          </motion.p>
+
+          <p className="text-xs text-clinical-600">
             &copy; {currentYear} Hayer Technologies. All rights reserved.
           </p>
         </div>

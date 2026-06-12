@@ -26,7 +26,7 @@ interface ShowcaseBlock {
   badge: string;
   heading: string;
   body: string;
-  bullets: { icon: React.ElementType; text: string }[];
+  bullets: { icon: React.ComponentType<{ size?: number }>; text: string }[];
   imageAccent: string;
   imageLabel: string;
   imageSubtext: string;
