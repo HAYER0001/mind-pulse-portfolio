@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
+import AnimatedText from "@/components/ui/AnimatedText";
 
 const NetworkScene = dynamic(() => import("@/components/3d/NetworkScene"), {
   ssr: false,
@@ -61,21 +62,17 @@ export default function NewHero() {
         </motion.span>
 
         {/* H1 */}
-        <motion.h1
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={1}
+        <AnimatedText
+          text={"Connect Patients,\nDoctors, and Hospitals\nin Minutes."}
+          as="h1"
           className="mt-10 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-7xl"
-        >
-          Connect Patients,
-          <br />
-          Doctors, and Hospitals
-          <br />
-          <span className="bg-gradient-to-r from-medical-400 to-medical-200 bg-clip-text text-transparent">
-            in Minutes.
-          </span>
-        </motion.h1>
+          delay={0.45}
+          gradient={{
+            text: "in Minutes.",
+            className:
+              "bg-gradient-to-r from-medical-400 to-medical-200 bg-clip-text text-transparent",
+          }}
+        />
 
         {/* Subtext */}
         <motion.p
